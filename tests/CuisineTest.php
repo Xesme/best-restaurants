@@ -53,6 +53,23 @@
             // Assert
             $this->assertEquals([$new_test_cuisine, $new_test_cuisine2], $result);
         }
+
+        function test_deletAll()
+        {
+            // Arrange
+            $type = "American";
+            $id = NULL;
+            $new_test_cuisine = new Cuisine($type, $id);
+            $new_test_cuisine->save();
+
+            // Act
+            Cuisine::deleteAll();
+            $result = Cuisine::getAll();
+
+            // Assert
+            $this->assertEquals([], $result);
+        }
+
     }
 
 
