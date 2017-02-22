@@ -20,7 +20,7 @@
             $this->type = $new_type;
         }
 
-        function getID()
+        function getId()
         {
             return $this->id;
         }

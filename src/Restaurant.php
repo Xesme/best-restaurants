@@ -2,18 +2,18 @@
     class Restaurant
     {
         private $name;
-        private $id;
+        private $rating;
         private $cuisine_id;
         private $review;
-        private $rating;
+        private $id;
 
-        function __construct($name, $id = NULL, $cuisine_id, $review, $rating)
+        function __construct($name, $rating, $cuisine_id, $review, $id = NULL)
         {
             $this->name = $name;
-            $this->id = $id;
+            $this->rating = $rating;
             $this->cuisine_id = $cuisine_id;
             $this->review = $review;
-            $this->rating = $rating;
+            $this->id = $id;
         }
 
         function getName()
@@ -58,13 +58,14 @@
 
         function save()
         {
-            $GLOBALS['DB']->exec("INSERT INTO restaurants (name, review, cuisine_id, rating) VALUES ('{$this->getName()}', '{$this->getReview()}', {$this->getCuisineId()}, {$this->getRating()});");
-            $this->id = $GLOBALS['DB']->insertLastId();
+            $GLOBALS['DB']->exec("INSERT INTO restaurants (name, rating, cuisine_id, review) VALUES ('{$this->getName()}', {$this->getRating()}, {$this->getCuisineId()}, '{$this->getReview()}');");
+            $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
         static function getAll()
         {
-            $returned_restaurants = $GlOBALS['DB']->query("SELECT * FROM restaurants;");
+            $returned_restaurants = $GLOBALS['DB']->query("SELECT * FROM restaurants;");
+
             $restaurants = array();
             foreach($returned_restaurants as $restaurant)
             {
@@ -73,9 +74,11 @@
                 $cuisine_id = $restaurant['cuisine_id'];
                 $review = $restaurant['review'];
                 $rating = $restaurant['rating'];
-                $new_restaurant = new Restaurant($name, $id, $cuisine_id, $review, $rating);
+                $new_restaurant = new Restaurant($name, $rating, $cuisine_id, $review, $id);
+                var_dump($new_restaurant);
                 array_push($restaurants, $new_restaurant);
             }
+
             return $restaurants;
         }
 
