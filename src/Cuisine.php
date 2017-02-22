@@ -29,6 +29,7 @@
         {
             $GLOBALS['DB']->exec("INSERT INTO cuisines (type) VALUES ('{$this->getType()}');");
             $this->id = $GLOBALS['DB']->lastInsertId();
+            
         }
 
         static function getAll()

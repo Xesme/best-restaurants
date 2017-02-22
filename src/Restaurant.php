@@ -62,6 +62,23 @@
             $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
+        function search($cuisine_id)
+        {
+            $returned_restaurants = $GLOBALS['DB']->query("SELECT * FROM restaurants WHERE cuisine_id = $cuisine_id;");
+            $restaurants = array();
+            foreach($returned_restaurants as $restaurant)
+            {
+                $name = $restaurant['name'];
+                $id = $restaurant['id'];
+                $cuisine_id = $restaurant['cuisine_id'];
+                $review = $restaurant['review'];
+                $rating = $restaurant['rating'];
+                $new_restaurant = new Restaurant($name, $rating, $cuisine_id, $review, $id);
+                array_push($restaurants, $new_restaurant);
+            }
+            return $restaurants;
+        }
+
         static function getAll()
         {
             $returned_restaurants = $GLOBALS['DB']->query("SELECT * FROM restaurants;");
