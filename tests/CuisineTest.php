@@ -35,7 +35,24 @@
             $this->assertEquals([$new_test_cuisine], $result);
         }
 
-    
+        function test_getAll()
+        {
+            // Arrange
+            $type = "American";
+            $id = NULL;
+            $new_test_cuisine = new Cuisine($type, $id);
+            $new_test_cuisine->save();
+
+            $type2 = "Mexican";
+            $new_test_cuisine2 = new Cuisine($type2, $id);
+            $new_test_cuisine2->save();
+
+            // Act
+            $result = Cuisine::getAll();
+
+            // Assert
+            $this->assertEquals([$new_test_cuisine, $new_test_cuisine2], $result);
+        }
     }
 
 
