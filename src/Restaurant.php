@@ -75,7 +75,6 @@
                 $review = $restaurant['review'];
                 $rating = $restaurant['rating'];
                 $new_restaurant = new Restaurant($name, $rating, $cuisine_id, $review, $id);
-                var_dump($new_restaurant);
                 array_push($restaurants, $new_restaurant);
             }
 
