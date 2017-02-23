@@ -46,6 +46,20 @@
             $this->rating = $new_rating;
         }
 
+        function getType()
+        {
+            $cuisines = Cuisine::getAll();
+            $cuisine_type = "";
+            foreach($cuisines as $cuisinse)
+            {
+                if ($cuisine->getId() == $this->cuisine_id)
+                {
+                    $cuisine_type = $cuisine->getType();
+                }
+            }
+            return $cuisine_type;
+        }
+
         function getId()
         {
             return $this->id;
@@ -62,7 +76,7 @@
             $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
-        function search($cuisine_id)
+        static function search($cuisine_id)
         {
             $returned_restaurants = $GLOBALS['DB']->query("SELECT * FROM restaurants WHERE cuisine_id = $cuisine_id;");
             $restaurants = array();

@@ -6,6 +6,38 @@
     </head>
     <body>
         <h2>Add restaurant to the PDX Eats database</h2>
-        <label></label>
+
+        <form action='/add-restaurant' method='post'>
+            <label for='restaurant_name'>Restaurant Name: </label>
+            <input type='text' name='restaurant_name'>
+
+            <label for='rating'>Rating: </label>
+            <input type='number' name='rating' max='10' min='1'>
+
+            <label for='review'>Review: </label>
+            <input type='text' name='review'>
+
+            {% if cuisines is not empty %}
+                <select name='cuisine_id'>
+                    <option></option>
+                    {% for cuisine in cuisines %}
+                        <option value = '{{ cuisine.getId }}' >{{ cuisine.getType }}</option>
+                    {% endfor %}
+                </select>
+            {% endif %}
+            <label for='cuisine_type'>New Cuisine Type: </label>
+            <input name='cuisine_type' type='text'>
+
+            <button type='submit'>Add restaurant</button>
+        </form>
+
+        {% if cuisines is not empty %}
+            <ul>
+            <h3>Current Cuisine Choices</h3>
+                {% for cuisine in cuisines %}
+                    <li><a href='/cuisines/{{ cuisine.getId }}'> {{ cuisine.getType }}</a></li>
+                {% endfor %}
+            </ul>
+        {% endif %}
     </body>
 </html>
