@@ -143,6 +143,37 @@
             // Assert
             $this->assertEquals([$new_restaurant3], $result);
         }
+
+        function test_edit()
+        {
+            // Arrange
+            $type = "American";
+            $id = NULL;
+            $new_test_cuisine = new Cuisine($type, $id);
+            $new_test_cuisine->save();
+
+            $name = "Bobs Burgers";
+            $rating = 5;
+            $review = "Great atmosphere";
+            $id2 = NULL;
+            $cuisine_id = $new_test_cuisine->getId();
+            $new_restaurant = new Restaurant($name, $rating, $cuisine_id, $review, $id2);
+            $new_restaurant->save();
+            $restaurant_id = $new_restaurant->getId();
+
+            $new_name = "Burger Bob";
+            $new_rating = 7;
+            $new_review = "EDIT post the new owners have brought new life to this business";
+            $test_restaurant = new Restaurant($new_name, $new_rating, $cuisine_id, $new_review, $restaurant_id);
+
+
+            // Act
+            $new_restaurant->edit($new_name, $new_rating, $new_review);
+            $result = Restaurant::getRestaurantById($restaurant_id);
+
+            // Assert
+            $this->assertEquals($test_restaurant, $result[0]);
+        }
     }
 
 

@@ -57,6 +57,14 @@
             return $this->cuisine_id;
         }
 
+        function edit($new_name, $new_rating, $new_review)
+        {
+            $GLOBALS['DB']->exec("UPDATE restaurants SET name = '{$new_name}', rating = {$new_rating} , review = '{$new_review}' WHERE id = {$this->getId()};");
+            $this->setName($new_name);
+            $this->setRating($new_rating);
+            $this->setReview($new_review);
+        }
+
         function save()
         {
             $GLOBALS['DB']->exec("INSERT INTO restaurants (name, rating, cuisine_id, review) VALUES ('{$this->getName()}', {$this->getRating()}, {$this->getCuisineId()}, '{$this->getReview()}');");
