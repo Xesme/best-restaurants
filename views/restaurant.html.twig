@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>{{ restaurant[0].getName }}</title>
+    </head>
+    <body>
+        <h1>{{ restaurant[0].getName }}</h1>
+        <h3>Restaurant rating: {{ restaurant[0].getRating }}</h3>
+        <h2>Reviews:</h2>
+        <ul>
+         <li>{{restaurant[0].getReview}}</li>
+        </ul>
+        <a href="/"><button type="button">go home</button></a>
+
+        <form action="/restaurant/delete/{{ restaurant[0].getId }}" method="post">
+            <input type="hidden" name="_method" value="delete">
+            <button type="submie">delete</button>
+        </form>
+    </body>
+</html>

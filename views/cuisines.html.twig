@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{{ restaurants[0].getType }}</title>
+    <title>{{ cuisine }}</title>
 </head>
 
 <body>
-    <h2>{{ restaurants[0].getType }}</h2>
+    <h2>{{ cuisine }}</h2>
     {% if restaurants is not empty %}
         <ul>
             {% for restaurant in restaurants %}
-                <li>{{ restaurant.getName }}</li>
+                <li><a href= "/restaurant/{{ restaurant.getId }}"> {{ restaurant.getName }}</a> rating: {{ restaurant.getRating }}</li>
             {% endfor %}
         </ul>
     {% endif %}
+    <form action="/" method="get">
+    <button type="submit">go home</button>
+    </form>
 </body>
 </html>

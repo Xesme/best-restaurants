@@ -29,7 +29,7 @@
         {
             $GLOBALS['DB']->exec("INSERT INTO cuisines (type) VALUES ('{$this->getType()}');");
             $this->id = $GLOBALS['DB']->lastInsertId();
-            
+
         }
 
         static function getAll()
@@ -49,6 +49,18 @@
         static function deleteAll()
         {
             $GLOBALS['DB']->exec("DELETE FROM cuisines;");
+        }
+
+        static function getCuisineById($cuisine_id)
+        {
+            $return_type = $GLOBALS['DB']->query("SELECT * FROM cuisines WHERE id = '{$cuisine_id}';");
+            
+            $cuisine = " ";
+            foreach ($return_type as $type)
+            {
+                $cuisine = $type['type'];
+            }
+            return $cuisine;
         }
     }
 

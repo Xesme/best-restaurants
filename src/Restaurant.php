@@ -46,19 +46,6 @@
             $this->rating = $new_rating;
         }
 
-        function getType()
-        {
-            $cuisines = Cuisine::getAll();
-            $cuisine_type = "";
-            foreach($cuisines as $cuisinse)
-            {
-                if ($cuisine->getId() == $this->cuisine_id)
-                {
-                    $cuisine_type = $cuisine->getType();
-                }
-            }
-            return $cuisine_type;
-        }
 
         function getId()
         {
@@ -76,9 +63,14 @@
             $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
+        function deleteRestaurant()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM restaurants WHERE id = '{$this->getId()}';");
+        }
+
         static function search($cuisine_id)
         {
-            $returned_restaurants = $GLOBALS['DB']->query("SELECT * FROM restaurants WHERE cuisine_id = $cuisine_id;");
+            $returned_restaurants = $GLOBALS['DB']->query("SELECT * FROM restaurants WHERE cuisine_id = $cuisine_id ORDER BY rating DESC;");
             $restaurants = array();
             foreach($returned_restaurants as $restaurant)
             {
@@ -117,5 +109,21 @@
             $GLOBALS['DB']->exec("DELETE FROM restaurants;");
         }
 
+        static function getRestaurantById($restaurant_id)
+        {
+            $returned_restaurant = $GLOBALS['DB']->query("SELECT * FROM restaurants WHERE id = '{$restaurant_id}';");
+            $restaurant = array();
+            foreach($returned_restaurant as $found_restaurant)
+            {
+                $name = $found_restaurant['name'];
+                $id = $found_restaurant['id'];
+                $cuisine_id = $found_restaurant['cuisine_id'];
+                $review = $found_restaurant['review'];
+                $rating = $found_restaurant['rating'];
+                $new_restaurant = new Restaurant($name, $rating, $cuisine_id, $review, $id);
+                array_push($restaurant, $new_restaurant);
+            }
+            return $restaurant;
+        }
     }
  ?>

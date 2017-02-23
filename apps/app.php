@@ -12,6 +12,8 @@
     $app = new Silex\Application();
 
     $app->register(new Silex\Provider\TwigServiceProvider(), array('twig.path' => __DIR__.'/../views'));
+    use Symfony\Component\HttpFoundation\Request;
+    Request::enableHttpMethodParameterOverride();
 
     $app->get("/", function() use($app){
         $cuisines = Cuisine::getAll();
@@ -21,7 +23,7 @@
 
     $app->post('/add-restaurant', function() use($app) {
         $id = NULL;
-        $new_restaurant = new Restaurant($_POST['restaurant_name'], $_POST['rating'], $_POST['cuisine_id'],  "Its ok", 0);
+        $new_restaurant = new Restaurant($_POST['restaurant_name'], $_POST['rating'], $_POST['cuisine_id'],  $_POST['review'], $id);
         $new_restaurant->save();
         var_dump($new_restaurant);
         $cuisines = Cuisine::getAll();
@@ -31,10 +33,24 @@
 
     $app->get('/cuisines/{id}', function($id) use($app) {
         $found_restaurants = Restaurant::search($id);
-
-        return $app['twig']->render('cuisines.html.twig', array('restaurants' => $found_restaurants));
+        $cuisine = Cuisine::getCuisineById($id);
+        return $app['twig']->render('cuisines.html.twig', array( 'cuisine' => $cuisine, 'restaurants' => $found_restaurants));
     });
 
+    $app->get('/restaurant/{id}', function($id) use($app){
+        $found_restaurant = Restaurant::getRestaurantById($id);
+        return $app['twig']->render('restaurant.html.twig', array('restaurant' => $found_restaurant));
+    });
+
+    $app->delete('/restaurant/delete/{id}', function($id) use($app){
+        $restaurant = Restaurant::getRestaurantById($id);
+        $cuisine_id = $restaurant[0]->getCuisineId();
+        $restaurant[0]->deleteRestaurant();
+        $found_restaurants = Restaurant::search($cuisine_id);
+        $cuisine = Cuisine::getCuisineById($cuisine_id);
+
+        return $app['twig']->render('cuisines.html.twig', array('cuisine' => $cuisine, 'restaurants' => $found_restaurants));
+    });
 
     return $app;
  ?>
