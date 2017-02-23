@@ -59,6 +59,18 @@
 
         function edit($new_name, $new_rating, $new_review)
         {
+            if ($new_name === '')
+            {
+                $new_name = $this->getName();
+            }
+            if ($new_rating === '')
+            {
+                $new_rating = $this->getRating();
+            }
+            if ($new_review === '')
+            {
+                $new_review = $this->getReview();
+            }
             $GLOBALS['DB']->exec("UPDATE restaurants SET name = '{$new_name}', rating = {$new_rating} , review = '{$new_review}' WHERE id = {$this->getId()};");
             $this->setName($new_name);
             $this->setRating($new_rating);

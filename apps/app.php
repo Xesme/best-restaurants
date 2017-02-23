@@ -10,6 +10,7 @@
     $DB = new PDO($server, $username, $password);
 
     $app = new Silex\Application();
+    $app['debug'] = true;
 
     $app->register(new Silex\Provider\TwigServiceProvider(), array('twig.path' => __DIR__.'/../views'));
     use Symfony\Component\HttpFoundation\Request;
@@ -50,6 +51,13 @@
         $cuisine = Cuisine::getCuisineById($cuisine_id);
 
         return $app['twig']->render('cuisines.html.twig', array('cuisine' => $cuisine, 'restaurants' => $found_restaurants));
+    });
+
+    $app->patch('/update/{id}', function($id) use($app) {
+        $restaurant = Restaurant::getRestaurantById($id);
+        $restaurant[0]->edit($_POST['new_name'], $_POST['new_rating'], $_POST['new_review']);
+
+        return $app['twig']->render('restaurant.html.twig', array('restaurant' => $restaurant));
     });
 
     return $app;
