@@ -57,7 +57,7 @@
             return $this->cuisine_id;
         }
 
-        function edit($new_name, $new_rating, $new_review)
+        function update($new_name, $new_rating, $new_review)
         {
             if ($new_name === '')
             {
@@ -90,7 +90,7 @@
 
         static function search($cuisine_id)
         {
-            $returned_restaurants = $GLOBALS['DB']->query("SELECT * FROM restaurants WHERE cuisine_id = $cuisine_id ORDER BY rating DESC;");
+            $returned_restaurants = $GLOBALS['DB']->query("SELECT * FROM restaurants WHERE cuisine_id = $cuisine_id ORDER BY rating DESC, name;");
             $restaurants = array();
             foreach($returned_restaurants as $restaurant)
             {

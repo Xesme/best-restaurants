@@ -1,0 +1,27 @@
+body {
+    color: red;
+    background: black;
+    background-image: url('/img/background.jpg');
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: top;
+    bottom: 5%;
+}
+
+ul {
+    list-style: none;
+}
+
+h2 {
+    color: red;
+    font-family: 'Abril Fatface', cursive;
+    text-align: center;
+}
+
+.container {
+    background: rgba(0, 0, 0, 0.5);
+    margin-top: 15%;
+    height: 750px;
+    border-radius: 5%;
+
+}

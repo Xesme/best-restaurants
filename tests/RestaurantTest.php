@@ -144,7 +144,7 @@
             $this->assertEquals([$new_restaurant3], $result);
         }
 
-        function test_edit()
+        function test_update()
         {
             // Arrange
             $type = "American";

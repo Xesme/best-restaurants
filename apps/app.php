@@ -26,7 +26,6 @@
         $id = NULL;
         $new_restaurant = new Restaurant($_POST['restaurant_name'], $_POST['rating'], $_POST['cuisine_id'],  $_POST['review'], $id);
         $new_restaurant->save();
-        var_dump($new_restaurant);
         $cuisines = Cuisine::getAll();
 
         return $app['twig']->render('index.html.twig', array('cuisines' => $cuisines));
@@ -55,7 +54,7 @@
 
     $app->patch('/update/{id}', function($id) use($app) {
         $restaurant = Restaurant::getRestaurantById($id);
-        $restaurant[0]->edit($_POST['new_name'], $_POST['new_rating'], $_POST['new_review']);
+        $restaurant[0]->update($_POST['new_name'], $_POST['new_rating'], $_POST['new_review']);
 
         return $app['twig']->render('restaurant.html.twig', array('restaurant' => $restaurant));
     });
