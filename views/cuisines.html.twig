@@ -7,6 +7,7 @@
 </head>
 
 <body>
+  <h1>PDX Eats!</h1>
   <div class="container">
     <h2>{{ cuisine }}</h2>
     {% if restaurants is not empty %}
@@ -17,7 +18,7 @@
     </ul>
     {% endif %}
     <form action="/" method="get">
-      <button type="submit">go home</button>
+      <button class="home-button btn" type="submit">go home</button>
     </form>
   </div>
 </body>

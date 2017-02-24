@@ -54,7 +54,7 @@
         static function getCuisineById($cuisine_id)
         {
             $return_type = $GLOBALS['DB']->query("SELECT * FROM cuisines WHERE id = '{$cuisine_id}';");
-            
+
             $cuisine = " ";
             foreach ($return_type as $type)
             {

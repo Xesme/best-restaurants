@@ -12,16 +12,64 @@ ul {
     list-style: none;
 }
 
+h1 {
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 30%;
+    border-radius: 5%;
+    font-family:'Pacifico', cursive;
+    text-align: center;
+    text-shadow: 4px 4px black;
+    font-size: 72px;
+    margin-top: 5%;
+}
+
 h2 {
     color: red;
     font-family: 'Abril Fatface', cursive;
     text-align: center;
+    font-size: 43px;
+    text-shadow: 4px 4px black;
+}
+
+textarea {
+    color: black;
 }
 
 .container {
     background: rgba(0, 0, 0, 0.5);
-    margin-top: 15%;
+    margin-top: 5%;
     height: 750px;
     border-radius: 5%;
+    padding: 10px;
+}
 
+.rating {
+    color: #35609D;
+    text-shadow: 4px 4px black;
+    font-size: 22px;
+    font-family: 'Permanent Marker', cursive;
+    text-align: center;
+}
+
+.delete-button {
+    float: right;
+}
+
+.home-button {
+ background-color: #35609D;
+ color: #fff;
+}
+
+.move-me {
+    border: soild 2px #fff;
+}
+
+.rounded {
+    border-radius: 10px;
+}
+
+.review-box {
+    text-align: center;
+    margin-bottom: 10px;
+    border: solid 2px #fff;
 }

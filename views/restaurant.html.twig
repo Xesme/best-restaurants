@@ -7,32 +7,42 @@
   <title>{{ restaurant[0].getName }}</title>
 </head>
 <body>
+  <h1>PDX Eats!</h1>
   <div class="container">
-
-    <h1>{{ restaurant[0].getName }}</h1>
-    <h3>Restaurant rating: {{ restaurant[0].getRating }}</h3>
-    <h2>Reviews:</h2>
-    <ul>
-      <li>{{restaurant[0].getReview}}</li>
-    </ul>
-    <a href="/"><button type="button">go home</button></a>
-
-    <form action="/restaurant/delete/{{ restaurant[0].getId }}" method="post">
-      <input type="hidden" name="_method" value="delete">
-      <button type="submit">delete</button>
-    </form>
+    <h2>{{ restaurant[0].getName }}</h2>
+    <h3 class="rating">Restaurant rating: {{ restaurant[0].getRating }}</h3>
+    <div class="rating-box">
+      <h3>Reviews:</h3>
+      <ul>
+        <li>{{restaurant[0].getReview}}</li>
+      </ul>
+    </div>
+    <!-- HOME BUTTON -->
+    <a href="/"><button class="home-button btn" type="button">go home</button></a>
+    <!--  DELETE BUTTON -->
+    <div class="delete-button">
+      <form action="/restaurant/delete/{{ restaurant[0].getId }}" method="post">
+        <input type="hidden" name="_method" value="delete">
+        <button class="btn btn-danger" type="submit">Delete Restaurant</button>
+      </form>
+  </div>
+    <!-- update form for restaurants -->
     <h2>Update this restaurant:</h2>
     <form action="/update/{{ restaurant[0].getId }}" method="post">
       <input type="hidden" name="_method" value="patch">
-      <label for="new_name">New name:</label>
-      <input type="text" name="new_name">
-
-      <label for="new_rating"> New rating:</label>
-      <input type="number" name="new_rating" min="1" max="10" >
-
+      <div class="form-group">
+        <label for="new_name">New name:</label>
+        <input class="rounded" type="text" name="new_name">
+      </div>
+      <div class="form-group">
+        <label for="new_rating"> New rating:</label>
+        <input class="rounded" type="number" name="new_rating" min="1" max="10" >
+      </div>
+      <div class="form-group">
       <label for="new_review"> New review:</label>
-      <input type="textarea" name="new_review">
-
+      <br>
+      <textarea class="rounded" rows="5" cols="40" name="new_review"></textarea>
+    </div>
       <button type="submit">Update</button>
     </form>
   </div>

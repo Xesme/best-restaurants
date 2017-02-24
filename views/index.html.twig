@@ -7,32 +7,33 @@
   <title>PDX Eats!</title>
 </head>
 <body>
+  <h1>PDX Eats!</h1>
   <div class="container">
-
-    <h2>Add restaurant to the PDX Eats database</h2>
-
-    <form action='/add-restaurant' method='post'>
-      <label for='restaurant_name'>Restaurant Name: </label>
-      <input type='text' name='restaurant_name'>
-      <label for='rating'>Rating: </label>
-      <input type='number' name='rating' max='10' min='1'>
-      <label for='review'>Review: </label>
-      <input type='text' name='review'>
-      <!-- drop down menu -->
-      {% if cuisines is not empty %}
-      <select name='cuisine_id'>
-        <option></option>
-        {% for cuisine in cuisines %}
-        <option value = '{{ cuisine.getId }}' >{{ cuisine.getType }}</option>
-        {% endfor %}
-      </select>
-      {% endif %}
-      <button type='submit'>Add restaurant</button>
+    <div class="move-me">
+      <h2>Add a restaurant to the PDX Eats database</h2>
+      <form action='/add-restaurant' method='post'>
+        <label for='restaurant_name'>Restaurant Name: </label>
+        <input type='text' name='restaurant_name'>
+        <label for='rating'>Rating: </label>
+        <input type='number' name='rating' max='10' min='1'>
+        <label for='review'>Review: </label>
+        <input type='text' name='review'>
+        <!-- drop down menu -->
+        {% if cuisines is not empty %}
+        <select name='cuisine_id'>
+          <option></option>
+          {% for cuisine in cuisines %}
+          <option value = '{{ cuisine.getId }}' >{{ cuisine.getType }}</option>
+          {% endfor %}
+        </select>
+        {% endif %}
+        <button class="btn btn-success" type='submit'>Add restaurant</button>
+      </div>
       <!-- links for cuisine types -->
     </form>
     {% if cuisines is not empty %}
     <ul>
-      <h3>Current Cuisine Choices</h3>
+      <h3>Browse by cuisine:</h3>
       {% for cuisine in cuisines %}
       <li><a href='/cuisines/{{ cuisine.getId }}'> {{ cuisine.getType }}</a></li>
       {% endfor %}
